@@ -12,17 +12,15 @@ window.onload = function(){
     //<input type="button" value="Add new video game"> send back to html
 }
 
-function addVideoGame(){
+function addVideoGame():void{
 
     resetErrorMessages();
     
-    isTextPresent("title", "A title is required.");
-    isTextPresent("price", "A price is required.");
 
-    /*if(isAllDataValid()){
+    if(isAllDataValid()){
         let game = getVideoGame();
         displayGame(game);
-    }*/
+    }
 }
 
 function getById(id:string){
@@ -50,7 +48,7 @@ function getVideoGame():VideoGame{
     
     game.isDigitalOnly = digitalOnly.checked;
 
-    console.log(game);
+    
     return game;
 
     /*if(digitalOnly.checked){
@@ -91,14 +89,41 @@ function displayGame(myGame:VideoGame):void{
 }
 
 
-/*function isAllDataValid(){
-    resetErrorMessages();
-    
-    isTextPresent("title", "A title is required.");
-    isTextPresent("price", "A price is required.");
+function isAllDataValid(){
 
+    resetErrorMessages();
+
+    if(isTextPresent("title", "A title is required.")){
+        if(isTextPresent("price", "A price is required.")){
+            if(IsInputANumber("price", "Must be a valid number")){
+                if(isRatingSelected()){
+                    return true;
+                }
+            }
+           
+        }
+    }
+    
+    else{
+        return false;
+    }
+}
+
+function IsInputANumber(id:string, errMsg:string):boolean {
+    let txtBox = <HTMLInputElement>getById(id);
+
+    let txtBoxValue = txtBox.value;
+    
+
+    if (isNaN(parseFloat(txtBoxValue)) || parseFloat(txtBoxValue) <= 0) {
+        let errSpan = 
+        <HTMLSpanElement>txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    
+    }
     return true;
-}*/
+}
 
 function isTextPresent(id:string, errMsg:string):boolean {
     let txtBox = <HTMLInputElement>getById(id);
@@ -112,6 +137,23 @@ function isTextPresent(id:string, errMsg:string):boolean {
     }
 
     return true;
+}
+
+function isRatingSelected():boolean{
+    let ratingInput = <HTMLSelectElement>getById("rating");
+    let errMsg = "Must select a rating";
+    if(ratingInput.value == "Please choose a rating."){
+        let errSpan = 
+        <HTMLSpanElement>ratingInput.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+
+    return true;
+}
+
+function selectARating(id:string, errMsg:string){
+
 }
 
 function resetErrorMessages():void{
@@ -128,29 +170,3 @@ function resetErrorMessages():void{
         }
     }
 }
-
-/*
-function main():void{
-    resetErrorMessages();
-    isTextPresent("first-name", "First name is required.");
-    isTextPresent("last-name", "Last name is required.");
-
-    
-    checkValidDate();
-}
-
-
-function isTextPresent(id:string, errMsg:string):boolean {
-    let txtBox = <HTMLInputElement>document.getElementById(id);
-
-    let txtBoxValue = txtBox.value;
-    if (txtBoxValue == "") {
-        let errSpan = 
-        <HTMLSpanElement>txtBox.nextElementSibling;
-        errSpan.innerText = errMsg;
-        return false;
-    }
-
-    return true;
-}
-*/
