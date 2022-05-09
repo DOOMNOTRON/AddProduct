@@ -26,9 +26,21 @@ function getVideoGame() {
     game.rating = ratingInput.value;
     var digitalOnly = getById("online");
     game.isDigitalOnly = digitalOnly.checked;
+    console.log(game);
     return game;
 }
 function displayGame(myGame) {
+    var dispalyDiv = getById("display");
+    var gameHeading = document.createElement("h2");
+    gameHeading.innerText = myGame.title;
+    var gameInfo = document.createElement("p");
+    var notDigitalDisplay = " not";
+    if (myGame.isDigitalOnly) {
+        notDigitalDisplay = "";
+    }
+    gameInfo.innerText = "".concat(myGame.title, " has a rating of ").concat(myGame.rating, ", and it costs $").concat(myGame.price.toFixed(2), ". It is").concat(notDigitalDisplay, " digital only.");
+    dispalyDiv.appendChild(gameHeading);
+    dispalyDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
     return true;

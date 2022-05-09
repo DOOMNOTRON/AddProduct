@@ -44,7 +44,7 @@ function getVideoGame():VideoGame{
     
     game.isDigitalOnly = digitalOnly.checked;
 
-    //console.log(game); didnt work
+    console.log(game);
     return game;
 
     /*if(digitalOnly.checked){
@@ -57,6 +57,30 @@ function getVideoGame():VideoGame{
 }
 
 function displayGame(myGame:VideoGame):void{
+    let dispalyDiv = getById("display");
+
+    // create <h2> with game tile
+    let gameHeading = document.createElement("h2"); 
+    gameHeading.innerText = myGame.title;
+
+    //create <p> with game infromation
+    let gameInfo = document.createElement("p");
+
+    let notDigitalDisplay = " not";
+    if(myGame.isDigitalOnly){
+        notDigitalDisplay = "";
+    }
+    gameInfo.innerText = `${myGame.title} has a rating of ${myGame.rating}, and it costs $${myGame.price.toFixed(2)}. It is${notDigitalDisplay} digital only.`
+    
+    
+    /*myGame.title + " has a rating of " + myGame.rating + ", and it costs "
+        + myGame.price + "." + " It is" + notDigitalDisplay + " digital only."
+    */
+    //add <h2> in the <div id=display">
+    dispalyDiv.appendChild(gameHeading);
+
+    // add <p> of game info
+    dispalyDiv.appendChild(gameInfo);
 
 }
 
