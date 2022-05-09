@@ -7,16 +7,22 @@ class VideoGame{
 
 
 window.onload = function(){
-    let addBtn = <HTMLElement>document.querySelector("input[type=button]");
+    let addBtn = <HTMLElement>document.querySelector("input[type=button]");//"input[type=button]"
     addBtn.onclick = addVideoGame;
+    //<input type="button" value="Add new video game"> send back to html
 }
 
 function addVideoGame(){
 
-    if(isAllDataValid()){
+    resetErrorMessages();
+    
+    isTextPresent("title", "A title is required.");
+    isTextPresent("price", "A price is required.");
+
+    /*if(isAllDataValid()){
         let game = getVideoGame();
         displayGame(game);
-    }
+    }*/
 }
 
 function getById(id:string){
@@ -84,7 +90,67 @@ function displayGame(myGame:VideoGame):void{
 
 }
 
-function isAllDataValid(){
+
+/*function isAllDataValid(){
+    resetErrorMessages();
+    
+    isTextPresent("title", "A title is required.");
+    isTextPresent("price", "A price is required.");
+
+    return true;
+}*/
+
+function isTextPresent(id:string, errMsg:string):boolean {
+    let txtBox = <HTMLInputElement>getById(id);
+
+    let txtBoxValue = txtBox.value;
+    if (txtBoxValue == "") {
+        let errSpan = 
+        <HTMLSpanElement>txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+
     return true;
 }
 
+function resetErrorMessages():void{
+    let allSpans = document.querySelectorAll("form span");
+
+    for(let i = 0; i < allSpans.length; i++){
+        let currSpan = <HTMLElement>allSpans[i];
+
+        if(currSpan.hasAttribute("data-required")){
+            currSpan.innerText =  "*";
+        }
+        else{
+            currSpan.innerText =  "";
+        }
+    }
+}
+
+/*
+function main():void{
+    resetErrorMessages();
+    isTextPresent("first-name", "First name is required.");
+    isTextPresent("last-name", "Last name is required.");
+
+    
+    checkValidDate();
+}
+
+
+function isTextPresent(id:string, errMsg:string):boolean {
+    let txtBox = <HTMLInputElement>document.getElementById(id);
+
+    let txtBoxValue = txtBox.value;
+    if (txtBoxValue == "") {
+        let errSpan = 
+        <HTMLSpanElement>txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+
+    return true;
+}
+*/

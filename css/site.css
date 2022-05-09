@@ -7,6 +7,10 @@ body{
     font-family: 'Allerta Stencil', sans-serif;
 }
 
+form span{
+
+    color:red;
+}
 
 label{
     width: 50%;
