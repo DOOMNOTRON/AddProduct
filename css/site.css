@@ -2,6 +2,12 @@ input[type=text]{
     padding: .4em;
 }
 
+body{
+
+    font-family: 'Allerta Stencil', sans-serif;
+}
+
+
 label{
     width: 50%;
     display: inline-block;
