@@ -4,3 +4,5 @@ This project will get more practice using TypeAcript, form validations , and int
 
 The project will also use CSS to make a decent looking web page
 that is responsive to screen size.
+## Live Websit
+See the live website @ https://doomnotron.github.io/AddProduct/
